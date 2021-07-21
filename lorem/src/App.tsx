@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import data from './data';
+import {Footer} from './footer';
 
 function App() {
   const [amount, setAmount] = useState(0);
@@ -21,23 +22,27 @@ function App() {
   };
   return (
     <div className="App">
-      <h1>React Lorem Generator</h1>
-      <div className="form-control">
-        <label htmlFor="amount">Paragraphs:</label>
-        <input
-          type="number"
-          name="amount"
-          id="amount"
-          min={0}
-          max={8}
-          value={amount}
-          onChange={handleChange}
-        />
-        <button onClick={generateLorem}>Generate</button>
-      </div>
+      <header>
+        <h1>React Lorem Generator</h1>
+        <div className="form-control">
+          <label htmlFor="amount">Paragraphs:</label>
+          <input
+            type="number"
+            name="amount"
+            id="amount"
+            min={0}
+            max={8}
+            value={amount}
+            onChange={handleChange}
+          />
+          <button onClick={generateLorem}>Generate</button>
+        </div>
+      </header>
+
       <div className="lorem-container">
         {lorem && lorem.map((lorem, index) => <p key={index}>{lorem}</p>)}
       </div>
+      <Footer />
     </div>
   );
 }
