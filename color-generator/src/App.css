@@ -5,3 +5,8 @@
 body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
+
+.color-box {
+  width: 200px;
+  height: 200px;
+}
