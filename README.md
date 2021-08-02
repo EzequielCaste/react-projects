@@ -12,7 +12,7 @@ Compilation of react projects I've made to test and learn react concepts
 - [x] Tabs [demo](https://react-ts-tabs.vercel.app/)
 - [x] Slider [demo](https://react-ts-slider.vercel.app/)
 - [x] Lorem [demo](https://react-lorem.vercel.app/)
-- [ ] Color Generator
+- [x] Color Generator [demo](https://color-generator-drab.vercel.app/)
 - [ ] Grocery Bud
 - [ ] Navbar
 - [ ] Sidebar and Modal
