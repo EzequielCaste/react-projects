@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Values from 'values.js';
 
@@ -9,17 +9,6 @@ function App() {
   const [error, setError] = useState(false);
   const [formValue, setFormValue] = useState(currentColor);
 
-  let colorArray = [];
-
-  useEffect(() => {
-    setColors(color.all(10));
-  }, [currentColor]);
-
-  // if (error) {
-  //   color = new Values(currentColor);
-  // }
-  // colorArray = color.all(10);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -28,6 +17,8 @@ function App() {
     } else {
       setError(false);
       setCurrentColor(formValue);
+      color = new Values(formValue);
+      setColors(color.all(10));
     }
   };
 
@@ -35,11 +26,16 @@ function App() {
     setFormValue(e.target.value);
   };
 
-  // console.log(color.all(10)); // weight hex
-
-  // color.all(10).forEach((color: {hex: string}) => {
-  //   console.log(color.hex);
-  // });
+  const showMessage = (id: string) => {
+    // show message
+    document.getElementById(id)?.setAttribute('style', 'display: block');
+    navigator.clipboard.writeText(`#${id}`);
+    // wait 1 sec
+    // hide message
+    setTimeout(() => {
+      document.getElementById(id)?.setAttribute('style', 'display: none');
+    }, 2000);
+  };
 
   return (
     <div className="App">
@@ -63,7 +59,10 @@ function App() {
         <div className="color-grid">
           {colors.map((color: {weight: string; hex: string; type: string}) => (
             <div
+              onClick={() => showMessage(color.hex)}
+              key={color.hex}
               style={{
+                cursor: 'pointer',
                 backgroundColor: `#${color.hex}`,
                 color: `${color.type === 'shade' ? '#fff' : '#000'}`,
               }}
@@ -71,6 +70,11 @@ function App() {
             >
               <p>#{color.hex}</p>
               <p>{color.weight}%</p>
+              {
+                <p id={color.hex} className="color-box-copy">
+                  COPIED TO CLIPBOARD
+                </p>
+              }
             </div>
           ))}
         </div>
