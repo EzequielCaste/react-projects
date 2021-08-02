@@ -6,7 +6,12 @@ body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
+.color-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
 .color-box {
+  padding: 2em;
   width: 200px;
   height: 200px;
 }

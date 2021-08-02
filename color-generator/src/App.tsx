@@ -1,62 +1,77 @@
-import {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import hexToRGB from './lib/hextoRGB';
-import RGBToHSL from './lib/RGBtoHSL';
+import Values from 'values.js';
 
 function App() {
-  const [colorState, setColorState] = useState(['#ffc125']);
+  const [currentColor, setCurrentColor] = useState('#ffc125');
+  let color = new Values(currentColor);
+  const [colors, setColors] = useState(color.all(10));
+  const [error, setError] = useState(false);
+  const [formValue, setFormValue] = useState(currentColor);
 
-  // convert HEX to RGB
-  let str: any = hexToRGB(colorState[0]); //rgb(245,1,37)
-
-  // divide the string into r, g, b
-  str = str.substring(4, str.length - 1).split(',');
-
-  // convert RBG to HSL
-  str = RGBToHSL(str); // hsl(43, 100%, 57.3%)
-
-  // split hsl to get only l
-  str = str.substring(4, str.length - 1).split(',');
-  let l = str[2].replace('%', '').trim();
-  let steps = 100 - l;
-  //l = Math.floor(Number(l)); // 57
-  let increments = (steps / 10).toFixed(2); // 4.27
-  let aux = +l;
   let colorArray = [];
-  for (let i = 0; i < 10; i++) {
-    aux = +aux + +increments;
-    colorArray.unshift(Math.ceil(aux));
-  }
-  colorArray.push(+l);
 
-  increments = (l / 10).toFixed(2);
-  aux = +l;
-  for (let i = 0; i < 10; i++) {
-    aux = +aux - +increments;
-    colorArray.push(Math.ceil(aux));
-  }
-  console.log(colorArray);
-  // make HSL 10 darker and 10 lighter
-  // increments of 5: 100,96,91,87,83,79,74,70,66,62,57
+  useEffect(() => {
+    setColors(color.all(10));
+  }, [currentColor]);
+
+  // if (error) {
+  //   color = new Values(currentColor);
+  // }
+  // colorArray = color.all(10);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (formValue.length < 4 || formValue.length > 7) {
+      setError(true);
+    } else {
+      setError(false);
+      setCurrentColor(formValue);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValue(e.target.value);
+  };
+
+  // console.log(color.all(10)); // weight hex
+
+  // color.all(10).forEach((color: {hex: string}) => {
+  //   console.log(color.hex);
+  // });
 
   return (
     <div className="App">
       <header>
         <div className="form-container">
           <h1>Color Generator</h1>
-          <form action="#">
-            <input type="text" name="color" id="color" value={colorState[0]} />
+          <form action="#" onSubmit={handleSubmit}>
+            <input
+              style={{border: `${error ? '2px solid red' : ''}`}}
+              type="text"
+              name="color"
+              id="color"
+              value={formValue}
+              onChange={handleChange}
+            />
             <button>Submit</button>
           </form>
         </div>
       </header>
       <section>
         <div className="color-grid">
-          {colorArray.map((color) => (
+          {colors.map((color: {weight: string; hex: string; type: string}) => (
             <div
-              style={{backgroundColor: `hsl(43, 100%, ${color}%)`}}
+              style={{
+                backgroundColor: `#${color.hex}`,
+                color: `${color.type === 'shade' ? '#fff' : '#000'}`,
+              }}
               className="color-box"
-            ></div>
+            >
+              <p>#{color.hex}</p>
+              <p>{color.weight}%</p>
+            </div>
           ))}
         </div>
       </section>
