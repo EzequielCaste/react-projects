@@ -40,8 +40,8 @@ function App() {
   return (
     <div className="App">
       <header>
+        <h1>Color Generator</h1>
         <div className="form-container">
-          <h1>Color Generator</h1>
           <form action="#" onSubmit={handleSubmit}>
             <input
               style={{border: `${error ? '2px solid red' : ''}`}}
