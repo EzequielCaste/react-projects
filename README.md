@@ -13,8 +13,8 @@ Compilation of react projects I've made to test and learn react concepts
 - [x] Slider [demo](https://react-ts-slider.vercel.app/)
 - [x] Lorem [demo](https://react-lorem.vercel.app/)
 - [x] Color Generator [demo](https://color-generator-drab.vercel.app/)
-- [ ] Grocery Bud
-- [ ] Navbar
+- [x] Grocery Bud [demo](https://ecaste-react-todo.vercel.app/)
+- [x] Navbar [demo](https://react-navbar-sepia.vercel.app/)
 - [ ] Sidebar and Modal
 - [ ] Stripe Menu
 - [ ] Cart
