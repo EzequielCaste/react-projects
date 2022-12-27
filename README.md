@@ -15,7 +15,7 @@ Compilation of react projects I've made to test and learn react concepts
 - [x] Color Generator [demo](https://color-generator-drab.vercel.app/)
 - [x] Grocery Bud [demo](https://ecaste-react-todo.vercel.app/)
 - [x] Navbar [demo](https://react-navbar-sepia.vercel.app/)
-- [ ] Sidebar and Modal
+- [x] Sidebar and Modal [demo](https://ecaste-react-modal.vercel.app/)
 - [ ] Stripe Menu
 - [ ] Cart
 - [ ] Cocktails
