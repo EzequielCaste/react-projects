@@ -2,7 +2,7 @@
 
 Compilation of react projects I've made to test and learn react concepts
 
-## Basic Projects
+## Basic Projects 
 
 - [x] Birthday Reminder [demo](https://react-ts-birthday-reminder.stackblitz.io)
 - [x] Tours [demo](https://ecaste-react-tours.vercel.app/)
